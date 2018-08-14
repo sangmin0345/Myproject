@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>ShoppingMall</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <display-name>Spring MVC</display-name>
+  <welcome-file-list>
+  	<welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>  
+  
+  
+  <!-- 스프링에서 사용할 DispactherServlet이라는 클래스 설정  -->
+  <servlet>
+  	 <!-- 디스팩처 서블릿 별명 -->
+  	 <servlet-name>shopping</servlet-name>
+  	 <!-- index.jsp페이지에서.. <servet-name>이 호출되면 실질적으로 불려질 디스팩처 서블릿 -->
+  	 <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+	 <!-- 디스팩처 서블릿 별명 -->
+ 	 <servlet-name>shopping</servlet-name> 	 
+ 	 
+ 	 <!--  확장자 명이 .do로 들어 오는 모든 요청은  DispatcherServlet을 요청하게 설정 -->
+ 	 <url-pattern>*.do</url-pattern>
+  
+  </servlet-mapping>
+
+
+	<!-- 한글이 깨지지 않도록 필터 태그 설정 (한글처리)-->
+	<!-- 
+		스프링에서 url요청이 매핑 될시.. 해당 필터태그를 처음으로 거치는데.. 이필터태그를 통과 할때.. 한글값을 인코딩 해주려면..
+		다음과 같이 작성 해야 한다.
+	 -->
+	 <filter>
+		<!-- 한글처리 담당할 클래스의 별명 지정 --> 
+	 	<filter-name>encodingFilter</filter-name>
+	 	<!-- 한글처리 담당할 클래스 지정 -->
+	 	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	 	<init-param>
+	 		<param-name>encoding</param-name>
+	 		<param-value>UTF-8</param-value>
+	 	</init-param>
+	 </filter>
+	
+	<filter-mapping>
+		<!-- 한글처리 담당할 클래스의 별명 지정 --> 
+	 	<filter-name>encodingFilter</filter-name>
+	 	<!-- url패턴 정의  아래는 모든 url요청을 의미함 -->
+	 	<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+ 
+</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
